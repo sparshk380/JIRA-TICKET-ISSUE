@@ -18,8 +18,11 @@ jobs:
       
     - name: Run Pre-commit Hook
       run: ./.github/scripts/commit-msg.sh $GITHUB_EVENT_PATH
+      continue-on-error: true  # Continue to the next step even if the script fails
 
-    # Add a step to revert changes if the commit lacks a Jira ticket reference
     - name: Revert Changes if No Jira Ticket Reference
       if: failure()
-      run: git reset --hard HEAD^
+      run: |
+        git reset --hard HEAD^
+        exit 1  # Exit with non-zero status code to indicate failure
+
