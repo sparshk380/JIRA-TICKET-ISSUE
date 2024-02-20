@@ -1,0 +1,21 @@
+name: Pre-commit Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Run Pre-commit Hook
+      run: ./.github/scripts/commit-msg.sh
+
