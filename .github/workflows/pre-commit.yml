@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-      
+
     - name: Run Pre-commit Hook
       run: ./.github/scripts/commit-msg.sh $GITHUB_EVENT_PATH
       continue-on-error: true  # Continue to the next step even if the script fails
@@ -25,7 +25,7 @@ jobs:
       run: |
         COMMIT_MSG=$(git log -1 --pretty=format:%s $GITHUB_SHA)
         if [[ ! $COMMIT_MSG =~ "HECO-" ]]; then
-          git reset --hard HEAD^
+          git checkout $GITHUB_SHA^ -- .
           echo "Changes reverted as commit message lacks a Jira ticket reference."
           exit 1  # Exit with non-zero status code to indicate failure
         fi
