@@ -11,6 +11,3 @@ if ! [[ $commit_message =~ $JIRA_PATTERN ]]; then
     echo "Error: Please add a Jira ticket reference in the commit message."
     exit 1
 fi
-
-# If a valid Jira ticket reference is found, allow the commit to proceed
-exit 0
