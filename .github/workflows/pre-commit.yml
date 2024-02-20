@@ -17,5 +17,5 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Run Pre-commit Hook
-      run: ./.github/scripts/commit-msg.sh
+      run: ./.github/scripts/commit-msg.sh $GITHUB_EVENT_PATH
 
